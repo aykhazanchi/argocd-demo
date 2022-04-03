@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver 
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: webserver 
+  template:
+    metadata:
+      labels:
+        app: webserver 
+    spec:
+      containers:
+        - image: docker.io/aykhazanchi/argocd-demo-webserver:v1 
+        name: webserver 
+        ports:
+        - containerPort: 80
