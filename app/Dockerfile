@@ -1,4 +1,5 @@
 FROM nginx:latest
 
-COPY ./devops.html /usr/share/nginx/html/index.html
+COPY ./style.css /usr/share/nginx/html/style.css
+COPY ./latest.html /usr/share/nginx/html/index.html
 
