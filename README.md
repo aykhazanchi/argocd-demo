@@ -18,23 +18,33 @@ For setting up K8s and understanding the basics, see [here](https://kubernetes.i
 ## Setup
 - Start minikube
 
-    `minikube start`
+    ```
+    minikube start
+    ```
 
 - Create ArgoCD namespace in minikube. We do this to keep our local cluster a little bit more organized.
 
-    `kubectl create namespace argocd`
+    ```
+    kubectl create namespace argocd
+    ```
 
 - Install ArgoCD
 
-    `kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
+    ```
+    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    ```
 
 - Wait for the pods to come to `Running` state. You can check this by running 
 
-    `kubectl get pods -n argocd`
+    ```
+    kubectl get pods -n argocd
+    ```
     
 - Once the pods are running, change ArgoCD service to use LoadBalancer. This makes it easier to access through our local minikube cluster. (Note: you can also port-forwarding instead)
 
-    `kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'`
+    ```
+    kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+    ```
 
 - Get ArgoCD initial secret and update to use your own unique password
 
@@ -52,7 +62,9 @@ For setting up K8s and understanding the basics, see [here](https://kubernetes.i
 
 - Get the exposed URL of ArgoCD from minikube.
 
-    `minikube service —url argocd-server -n argocd`
+    ```
+    minikube service —url argocd-server -n argocd
+    ```
 
     This should give you something of the form `http://<some-ip>:<some-port>`. You can now use this in your browser to access ArgoCD using admin credentials.
 
@@ -85,20 +97,28 @@ For setting up K8s and understanding the basics, see [here](https://kubernetes.i
 
 - Create the example nginx webserver we have in this repo as an ArgoCD app
 
-    `argocd app create webserver --repo https://github.com/aykhazanchi/argocd-demo.git --path . --dest-server https://kubernetes.default.svc --dest-namespace default`
+    ```
+    argocd app create webserver --repo https://github.com/aykhazanchi/argocd-demo.git --path . --dest-server https://kubernetes.default.svc --dest-namespace default
+    ```
 
 - Set the sync policy for our app to allow automated sync. With automatic sync, ArgoCD watches the Git repo and polls every 3 minutes to see if state has changed.
 
-    `argocd app set webserver --sync-policy automated --auto-prune --self-heal --allow-empty`
+    ```
+    argocd app set webserver --sync-policy automated --auto-prune --self-heal --allow-empty
+    ```
 
 - Sync (deploy) the application
 
-    `argocd app sync webserver`
+    ```
+    argocd app sync webserver
+    ```
 
 - Get the app url from minikube
+
     ```
     minikube service --url webserver -n default
     ```
+
 - You should now see our static nginx app in the browser using the url
 
 ### Automated Sync via ArgoCD
@@ -130,3 +150,5 @@ For setting up K8s and understanding the basics, see [here](https://kubernetes.i
       webserver:
         Image:        docker.io/aykhazanchi/argocd-demo-webserver:v1.1
     ```
+
+- Similarly, other changes can be performed such as increasing number of replicas in the pods or adding a new feature to the app. All changes will be monitored and ArgoCD will update the environment accordingly.
