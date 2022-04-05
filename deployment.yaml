@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: webserver 
 spec:
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -14,7 +14,7 @@ spec:
         app: webserver 
     spec:
       containers:
-      - image: docker.io/aykhazanchi/argocd-demo-webserver:v1
+      - image: docker.io/aykhazanchi/argocd-demo-webserver:v1.1
         name: webserver 
         ports:
         - containerPort: 80
