@@ -70,10 +70,14 @@ For setting up K8s and understanding the basics, see [here](https://kubernetes.i
 
 ### Deployment via UI (CLI steps follow below)
 - Login to ArgoCD admin dashboard with the credentials you set above
-- Click on New App 
-- Under `General`, enter the app details as below
-- Under `Source`, enter the git repo details as below
-- Under `Destination`, we deploy to the cluster url as our ArgoCD installation sits in the same cluster as our app
+- Click on New App
+<img width="306" alt="Screenshot 2022-04-05 at 16 04 55" src="https://user-images.githubusercontent.com/5686467/161775956-a727b956-69fd-4456-a244-e4dd603db116.png">
+- Under *General*, enter the app details as below
+<img width="299" alt="Screenshot 2022-04-05 at 16 05 16" src="https://user-images.githubusercontent.com/5686467/161776112-f7f1ee22-ce4e-45e9-9b88-6ec37db4668f.png">
+- Under *Source*, enter the git repo details as below
+<img width="443" alt="Screenshot 2022-04-05 at 16 05 46" src="https://user-images.githubusercontent.com/5686467/161776190-223e641e-6c3e-43d2-921c-858bbf47a1a8.png">
+- Under *Destination*, we deploy to the cluster url as our ArgoCD installation sits in the same cluster as our app
+<img width="334" alt="Screenshot 2022-04-05 at 16 05 59" src="https://user-images.githubusercontent.com/5686467/161776233-4bfa6789-849e-498c-b6ee-b6d0e3f57c76.png">
 - Click Create
 - You should see your app created as shown below
 - Click on the app and you should see that the current sync status is healthy (note: it may take some time to show as the pods can still be coming up in the background)
