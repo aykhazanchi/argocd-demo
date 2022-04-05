@@ -12,6 +12,7 @@ This guide assumes an existing setup of
 - Familiarity with kubectl commands
 
 For setting up K8s and understanding the basics, see [here](https://kubernetes.io/docs/tutorials/)
+
 ## Assumptions
 - This guide mostly replicates the installation of ArgoCD from their docs. ArgoCD is a fast-moving project so it is always advised to refer to their official docs in case something with the installation here fails.
 
@@ -71,22 +72,34 @@ For setting up K8s and understanding the basics, see [here](https://kubernetes.i
 ### Deployment via UI (CLI steps follow below)
 - Login to ArgoCD admin dashboard with the credentials you set above
 - Click on New App
-<img width="306" alt="Screenshot 2022-04-05 at 16 04 55" src="https://user-images.githubusercontent.com/5686467/161775956-a727b956-69fd-4456-a244-e4dd603db116.png">
+    
+    <img width="306" alt="Screenshot 2022-04-05 at 16 04 55" src="https://user-images.githubusercontent.com/5686467/161775956-a727b956-69fd-4456-a244-e4dd603db116.png">
 - Under *General*, enter the app details as below
-<img width="299" alt="Screenshot 2022-04-05 at 16 05 16" src="https://user-images.githubusercontent.com/5686467/161776112-f7f1ee22-ce4e-45e9-9b88-6ec37db4668f.png">
+    
+    <img width="299" alt="Screenshot 2022-04-05 at 16 05 16" src="https://user-images.githubusercontent.com/5686467/161776112-f7f1ee22-ce4e-45e9-9b88-6ec37db4668f.png">
 - Under *Source*, enter the git repo details as below
-<img width="443" alt="Screenshot 2022-04-05 at 16 05 46" src="https://user-images.githubusercontent.com/5686467/161776190-223e641e-6c3e-43d2-921c-858bbf47a1a8.png">
+    
+    <img width="443" alt="Screenshot 2022-04-05 at 16 05 46" src="https://user-images.githubusercontent.com/5686467/161776190-223e641e-6c3e-43d2-921c-858bbf47a1a8.png">
 - Under *Destination*, we deploy to the cluster url as our ArgoCD installation sits in the same cluster as our app
-<img width="334" alt="Screenshot 2022-04-05 at 16 05 59" src="https://user-images.githubusercontent.com/5686467/161776233-4bfa6789-849e-498c-b6ee-b6d0e3f57c76.png">
+    
+    <img width="334" alt="Screenshot 2022-04-05 at 16 05 59" src="https://user-images.githubusercontent.com/5686467/161776233-4bfa6789-849e-498c-b6ee-b6d0e3f57c76.png">
 - Click Create
 - You should see your app created as shown below
+    
+    <img width="440" alt="Screenshot 2022-04-05 at 16 07 15" src="https://user-images.githubusercontent.com/5686467/161777171-8c722ac8-c444-4fd1-ab44-062029c9d73f.png">
 - Click on the app and you should see that the current sync status is healthy (note: it may take some time to show as the pods can still be coming up in the background)
+
+    <img width="924" alt="Screenshot 2022-04-05 at 16 07 31" src="https://user-images.githubusercontent.com/5686467/161777237-ad5145fd-8816-4429-83e4-d8eaba40fac3.png">
 - When your app is deployed all monitors on the various pieces will turn into green hearts. Your app is up!
+    
+    <img width="1352" alt="Screenshot 2022-04-05 at 16 07 50" src="https://user-images.githubusercontent.com/5686467/161777316-ec30d4d6-2c87-42c5-ab3c-5bff30574b03.png">
 - Get the app url from minikube
     ```
     minikube service --url webserver -n default
     ```
 - You should now see our static nginx app in the browser using the url
+    
+    <img width="1678" alt="Screenshot 2022-04-05 at 16 31 26" src="https://user-images.githubusercontent.com/5686467/161777560-09da4147-5aff-4a85-91a9-46d4c56a68d9.png">
 - You can skip now to the `Automated Sync via ArgoCD` section to proceed further
 
 ### Deployment via ArgoCD CLI
